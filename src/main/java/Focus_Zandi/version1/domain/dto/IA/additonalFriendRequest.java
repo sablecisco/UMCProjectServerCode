@@ -6,7 +6,7 @@ import lombok.Setter;
 @Setter
 @Getter
 public class additonalFriendRequest {
-    private String username;
+    //private String username;
     private String friendUserName;
 
 }
