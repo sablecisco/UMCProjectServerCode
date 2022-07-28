@@ -34,6 +34,13 @@ public class MemberController {
         return details;
     }
 
+    // 유저 정보 수정 (최초생성시에는 null로 기입)
+    @PostMapping("/editMember")
+    public int getDetails(@RequestBody DetailsDto detailsDto, HttpServletRequest request, HttpServletResponse response) {
+        memberService.join(detailsDto, getUsername(request));
+        return response.getStatus();
+    }
+
     // 친구 추가
     @PostMapping("/addFriend")
     public int followMember(@RequestBody FolloweeNameDto followeeName, HttpServletResponse response, HttpServletRequest request) {
@@ -45,13 +52,6 @@ public class MemberController {
     @PostMapping("/removeFriend")
     public int unfollowMember(@RequestBody FolloweeNameDto followeeName, HttpServletResponse response, HttpServletRequest request) {
         memberService.makeUnFollow(followeeName.getFolloweeName(), getUsername(request));
-        return response.getStatus();
-    }
-
-    // 유저 정보 수정 (최초생성시에는 null로 기입)
-    @PostMapping("/editMember")
-    public int getDetails(@RequestBody DetailsDto detailsDto, HttpServletRequest request, HttpServletResponse response) {
-        memberService.join(detailsDto, getUsername(request));
         return response.getStatus();
     }
 

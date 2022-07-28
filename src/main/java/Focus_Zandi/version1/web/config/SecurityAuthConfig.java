@@ -55,6 +55,7 @@ public class SecurityAuthConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/loginProc")
                 .and()
                 .oauth2Login()
+                .loginProcessingUrl("/googleLoginProc")
                 .successHandler(new OAuthSuccessHandler(memberRepository))
                 .userInfoEndpoint()// 후처리 시작
                 .userService(principalOAuth2UserService); // 서비스에서 후처리함
