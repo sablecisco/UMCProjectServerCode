@@ -26,7 +26,7 @@ public class MemberController {
     //DTO 수정해서 프론트 요구사항 맞추면 됨
     // 유저 정보 조회
     @GetMapping("/showMember")
-    public MemberReturnerDto loginHandler(HttpServletResponse response, HttpServletRequest request) throws IOException {
+    public MemberReturnerDto showMember(HttpServletRequest request) {
         String username = getUsername(request);
         MemberReturnerDto details = memberService.findMemberByUserNameWithDetails(username);
 //        Member member = memberService.findMemberByUserName(username);
@@ -48,7 +48,7 @@ public class MemberController {
         return response.getStatus();
     }
 
-    // 유저 정보 수정
+    // 유저 정보 수정 (최초생성시에는 null로 기입)
     @PostMapping("/editMember")
     public int getDetails(@RequestBody DetailsDto detailsDto, HttpServletRequest request, HttpServletResponse response) {
         memberService.join(detailsDto, getUsername(request));
