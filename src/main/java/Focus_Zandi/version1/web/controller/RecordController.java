@@ -21,13 +21,15 @@ public class RecordController {
 
     private final RecordService recordService;
 
-    @PostMapping("/send/data")
+    // 오늘 공부기록 저장
+    @PostMapping("/saveRecords/today")
     public int receiveRecord (@RequestBody RecordsDto recordsDto, HttpServletRequest request, HttpServletResponse response) {
         String username = getUsername(request);
         recordService.save(username, recordsDto);
         return response.getStatus();
     }
 
+    // api시트에서 못 찾음
     @GetMapping("/showRecords")
     public void showTodayRecord(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String username = getUsername(request);
@@ -37,12 +39,14 @@ public class RecordController {
 
     // 지정 날짜로 검색
     // 항상 ?date=YYYY-MM-DD 형식을 지킬것
-    @GetMapping("/showRecords/d")
+    // 특정 날짜의 데이터 조회
+    @GetMapping("/records/date")
     public void showRecordByDate(@RequestParam("date") String date, HttpServletRequest request, HttpServletResponse response) throws IOException {
         String username = getUsername(request);
         findRecord(username, date, response);
     }
 
+    // 빈 달력 api시트에서 못 찾음
     @GetMapping("/records/monthly")
     public List<Integer> monthlyRecords(@RequestParam String month, HttpServletRequest request, HttpServletResponse response) throws IOException {
         List<Integer> monthly = recordService.findMonthly(month, getUsername(request));
@@ -53,7 +57,8 @@ public class RecordController {
     }
 
     // 월별 데이터 반환 (날짜와 총 집중시간)
-    @GetMapping("/records/monthly/v2")
+    // 이번달 공부내역 조회
+    @GetMapping("/records/date/{month}")
     public List<MonthlyRecordsDto> monthlyRecordsV2(@RequestParam String month, HttpServletRequest request, HttpServletResponse response) throws IOException {
         List<MonthlyRecordsDto> monthly = recordService.findMonthlyV2(month, getUsername(request));
         if (monthly.isEmpty()) {
@@ -62,13 +67,14 @@ public class RecordController {
         return monthly;
     }
 
-    //친구 일일 기록
+    // 친구들 랭킹 -일-
     //정렬로 보내는건 미구현
-    @GetMapping("/records/friendDailyRanking")
+    @GetMapping("/friendRanking/{day}")
     public List<MyFollowersDto> dailyRanks(HttpServletRequest request) {
         return recordService.dailyRanks(getUsername(request));
     }
 
+    // api시트에서 못 찾음
     private void findRecord(String username, String timeStamp, HttpServletResponse response) throws IOException {
         Records record = recordService.findRecordByTimeStamp(username, timeStamp);
         if (record == null) {
@@ -83,6 +89,7 @@ public class RecordController {
         response.getWriter().write(json);
     }
 
+    // api시트에서 못 찾음
     private String getUsername (HttpServletRequest request) {
         HttpSession session = request.getSession(false);
 

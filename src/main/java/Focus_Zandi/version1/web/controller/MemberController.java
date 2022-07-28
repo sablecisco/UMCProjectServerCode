@@ -24,7 +24,8 @@ public class MemberController {
     private final MemberService memberService;
 
     //DTO 수정해서 프론트 요구사항 맞추면 됨
-    @GetMapping("/getUserInfo")
+    // 유저 정보 조회
+    @GetMapping("/showMember")
     public MemberReturnerDto loginHandler(HttpServletResponse response, HttpServletRequest request) throws IOException {
         String username = getUsername(request);
         MemberReturnerDto details = memberService.findMemberByUserNameWithDetails(username);
@@ -33,27 +34,29 @@ public class MemberController {
         return details;
     }
 
-    @PostMapping("/doFollow")
+    // 친구 추가
+    @PostMapping("/addFriend")
     public int followMember(@RequestBody FolloweeNameDto followeeName, HttpServletResponse response, HttpServletRequest request) {
         memberService.makeFollow(followeeName.getFolloweeName(), getUsername(request));
         return response.getStatus();
     }
 
-    @PostMapping("/undoFollow")
+    // 친구 삭제
+    @PostMapping("/removeFriend")
     public int unfollowMember(@RequestBody FolloweeNameDto followeeName, HttpServletResponse response, HttpServletRequest request) {
         memberService.makeUnFollow(followeeName.getFolloweeName(), getUsername(request));
         return response.getStatus();
     }
 
-    //상세정보 기입 및 수정기능
-    @PostMapping("/register")
+    // 유저 정보 수정
+    @PostMapping("/editMember")
     public int getDetails(@RequestBody DetailsDto detailsDto, HttpServletRequest request, HttpServletResponse response) {
         memberService.join(detailsDto, getUsername(request));
         return response.getStatus();
     }
 
-    // 전체 팔로워 조회
-    @GetMapping("/findMyFollowers")
+    // 전체 친구 조회
+    @GetMapping("/findFriend")
     public List<String> getFollowers(HttpServletRequest request) {
         String username = getUsername(request);
         return memberService.getFollowers(username);
