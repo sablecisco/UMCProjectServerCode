@@ -8,6 +8,7 @@ import Focus_Zandi.version1.domain.dto.MemberReturnerDto;
 import Focus_Zandi.version1.web.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,45 +27,50 @@ public class MemberController {
     //DTO 수정해서 프론트 요구사항 맞추면 됨
     // 유저 정보 조회
     @GetMapping("/showMember")
-    public MemberReturnerDto showMember(HttpServletRequest request) {
-        String username = getUsername(request);
+    public MemberReturnerDto showMember(HttpServletRequest request, Authentication authentication) {
+        String username = getUsername(authentication);
         MemberReturnerDto details = memberService.findMemberByUserNameWithDetails(username);
-//        Member member = memberService.findMemberByUserName(username);
-//        MemberReturnerDto memberReturnerDto = new MemberReturnerDto(member);
         return details;
     }
 
     // 유저 정보 수정 (최초생성시에는 null로 기입)
     @PostMapping("/editMember")
-    public int getDetails(@RequestBody DetailsDto detailsDto, HttpServletRequest request, HttpServletResponse response) {
-        memberService.join(detailsDto, getUsername(request));
+    public int getDetails(@RequestBody DetailsDto detailsDto, Authentication authentication, HttpServletRequest request, HttpServletResponse response) {
+        memberService.join(detailsDto, getUsername(authentication));
         return response.getStatus();
     }
 
     // 친구 추가
     @PostMapping("/addFriend")
-    public int followMember(@RequestBody FolloweeNameDto followeeName, HttpServletResponse response, HttpServletRequest request) {
-        memberService.makeFollow(followeeName.getFolloweeName(), getUsername(request));
+    public int followMember(@RequestBody FolloweeNameDto followeeName, Authentication authentication, HttpServletResponse response, HttpServletRequest request) {
+        memberService.makeFollow(followeeName.getFolloweeName(), getUsername(authentication));
         return response.getStatus();
     }
 
     // 친구 삭제
     @PostMapping("/removeFriend")
-    public int unfollowMember(@RequestBody FolloweeNameDto followeeName, HttpServletResponse response, HttpServletRequest request) {
-        memberService.makeUnFollow(followeeName.getFolloweeName(), getUsername(request));
+    public int unfollowMember(@RequestBody FolloweeNameDto followeeName, Authentication authentication, HttpServletResponse response, HttpServletRequest request) {
+        memberService.makeUnFollow(followeeName.getFolloweeName(), getUsername(authentication));
         return response.getStatus();
     }
 
     // 전체 친구 조회
     @GetMapping("/findFriend")
-    public List<String> getFollowers(HttpServletRequest request) {
-        String username = getUsername(request);
+    public List<String> getFollowers(Authentication authentication) {
+        String username = getUsername(authentication);
         return memberService.getFollowers(username);
     }
 
-    private String getUsername (HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
-        SecurityContextImpl context = (SecurityContextImpl)session.getAttribute("SPRING_SECURITY_CONTEXT");
-        return context.getAuthentication().getName();
+    private String getUsername(Authentication authentication) {
+        String name = authentication.getName();
+        return name;
     }
+
+//    private String getUsername (HttpServletRequest request) {
+//        HttpSession session = request.getSession(false);
+//        SecurityContextImpl context = (SecurityContextImpl)session.getAttribute("SPRING_SECURITY_CONTEXT");
+//        return context.getAuthentication().getName();
+//    }
+
+
 }
