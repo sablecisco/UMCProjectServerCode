@@ -4,22 +4,17 @@ import Focus_Zandi.version1.domain.Member;
 import Focus_Zandi.version1.domain.MemberDetails;
 import Focus_Zandi.version1.domain.dto.JwtReturner;
 import Focus_Zandi.version1.web.config.jwt.CreateJwt;
-import Focus_Zandi.version1.web.config.jwt.JwtProperties;
 import Focus_Zandi.version1.web.config.oauth.provider.GoogleUser;
 import Focus_Zandi.version1.web.config.oauth.provider.OAuthUserInfo;
 import Focus_Zandi.version1.web.repository.MemberRepository;
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.algorithms.Algorithm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
-import java.sql.Ref;
-import java.util.Date;
+
 import java.util.Map;
 
 @RestController
