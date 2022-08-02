@@ -42,20 +42,14 @@ public class Records {
     public static Records createRecords(Member member, RecordsDto recordsDto) {
         Records records = new Records();
         records.setMember(member);
-        List<Integer> dataHolder = recordsDto.getConcentratedTime();
-        records.setYear(recordsDto.getTimeStamp().substring(0,4));
-        records.setMonth(recordsDto.getTimeStamp().substring(5,7));
-        records.setDay(recordsDto.getTimeStamp().substring(8,10));
+        records.setYear(recordsDto.getDate().substring(0,4));
+        records.setMonth(recordsDto.getDate().substring(5,7));
+        records.setDay(recordsDto.getDate().substring(8,10));
 
-        int max = 0;
-        int sum = 0;
-        for (Integer integer : dataHolder) {
-            sum += integer;
-            if (integer > max) max = integer;
-        }
-        records.setBrokenCounter(dataHolder.size());
-        records.setMaxConcentrationTime(max);
-        records.setTotal_time(sum);
+        records.setTotal_time(recordsDto.getConcentratedTime());
+        records.setBrokenCounter(recordsDto.getBrokenCount());
+        records.setMaxConcentrationTime(0);
+
         return records;
     }
 }

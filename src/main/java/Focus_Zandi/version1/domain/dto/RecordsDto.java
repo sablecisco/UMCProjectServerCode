@@ -9,6 +9,7 @@ import java.util.List;
 @Getter @Setter
 public class RecordsDto {
 
-    List<Integer> concentratedTime = new ArrayList<Integer>();
-    private String timeStamp;
+    private int concentratedTime;
+    private int brokenCount;
+    private String date;
 }

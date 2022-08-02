@@ -5,6 +5,7 @@ import Focus_Zandi.version1.web.config.auth.PrincipalOAuth2UserService;
 import Focus_Zandi.version1.web.config.jwt.JwtAuthorizationFilter;
 import Focus_Zandi.version1.web.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -38,12 +39,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().disable()
                 .httpBasic().disable()
 
-//                .addFilter(new JwtAuthenticationFilter(authenticationManager()))
                 .addFilter(new JwtAuthorizationFilter(authenticationManager(), memberRepository))
                 .authorizeRequests()
                 .antMatchers("/user/**").authenticated()
                 .antMatchers("/manger/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER')")
                 .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/members/**").permitAll()
                 .antMatchers("/oauth/**").permitAll()
                 .anyRequest().authenticated();
     }
@@ -51,5 +52,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/oauth/**");
+        web.ignoring().antMatchers("/members/**");
     }
 }

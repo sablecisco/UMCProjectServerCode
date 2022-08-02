@@ -12,4 +12,5 @@ public class DetailsDto {
 
     private String occupation;
     private String workPlace;
+    private String memo;
 }

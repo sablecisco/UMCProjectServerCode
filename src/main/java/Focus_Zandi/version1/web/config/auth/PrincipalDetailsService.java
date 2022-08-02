@@ -20,10 +20,10 @@ public class PrincipalDetailsService implements UserDetailsService {
     // 리턴 시 Authentication 내부에 UserDetails가 들어가고, Session에도 이게 들어간다.
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Member findUser = memberRepository.findByUsername(username);
+        Member findMember = memberRepository.findByUsername(username);
 
-        if (findUser != null) {
-            return new PrincipalDetails(findUser);
+        if (findMember != null) {
+            return new PrincipalDetails(findMember);
         }
         return null;
     }

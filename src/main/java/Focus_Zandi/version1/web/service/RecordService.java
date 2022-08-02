@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -26,7 +27,15 @@ public class RecordService {
     public void save(String username, RecordsDto recordsDto) {
         Member member = memberRepository.findByUsername(username);
         Records records = Records.createRecords(member, recordsDto);
-        recordRepository.save(records);
+        Records recordByTimeStamp = findRecordByTimeStamp(username, LocalDate.now().toString());
+
+        if(recordByTimeStamp == null ) {
+            recordRepository.save(records);
+        } else if (recordByTimeStamp != null) {
+            recordByTimeStamp.setBrokenCounter(records.getBrokenCounter());
+            recordByTimeStamp.setMaxConcentrationTime(records.getMaxConcentrationTime());
+            recordByTimeStamp.setTotal_time(records.getTotal_time());
+        }
     }
 
     public Records findRecordByTimeStamp(String username, String date) {

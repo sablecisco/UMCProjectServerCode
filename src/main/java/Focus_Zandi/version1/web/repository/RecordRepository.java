@@ -43,13 +43,14 @@ public class RecordRepository {
         String year = timeStamp.substring(0, 4);
         String month = timeStamp.substring(5, 7);
         String day = timeStamp.substring(8,10);
-        List<Records> resultList = em.createQuery("select r from Records r where r.member = :member and r.year = :year and r.month = :month and r.day = :day", Records.class)
+        Records singleResult = em.createQuery("select r from Records r where r.member = :member and r.year = :year and r.month = :month and r.day = :day", Records.class)
                 .setParameter("member", member)
                 .setParameter("year", year)
                 .setParameter("month", month)
                 .setParameter("day", day)
-                .getResultList();
-        return resultList.get(0);
+                .getSingleResult();
+
+        return singleResult;
     }
 
     public List<Integer> findAllByMonth(String month, Member member) {

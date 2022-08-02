@@ -1,8 +1,5 @@
 package Focus_Zandi.version1.domain;
 
-import Focus_Zandi.version1.domain.dto.DetailsDto;
-import Focus_Zandi.version1.domain.dto.MemberRegisterDto;
-import Focus_Zandi.version1.domain.dto.MemberUpdateDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

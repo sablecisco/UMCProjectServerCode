@@ -44,6 +44,13 @@ public class MemberService {
         return memberReturnerDto;
     }
 
+    public MemberReturnerDto findMemberByUserNameWithDetailsV2(String name) {
+        Member member = memberRepository.findByName(name);
+        MemberDetails memberDetails = member.getMemberDetails();
+        MemberReturnerDto memberReturnerDto = new MemberReturnerDto(member, memberDetails);
+        return memberReturnerDto;
+    }
+
     public void makeFollow(String followeeName, String username) {
         Member followee = memberRepository.findByUsername(followeeName);
         Member follower = memberRepository.findByUsername(username);

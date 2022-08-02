@@ -24,6 +24,7 @@ public class MemberDetails {
 
     private String occupation;
     private String workPlace;
+    private String memo;
 
     public static int calcAge(String dob) {
         int year = LocalDate.now().getYear();

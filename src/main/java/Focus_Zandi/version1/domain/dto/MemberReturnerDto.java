@@ -18,6 +18,7 @@ public class MemberReturnerDto {
 
     private String occupation;
     private String place;
+    private String memo;
 
     public MemberReturnerDto(Member member) {
         this.username = member.getUsername();
@@ -40,5 +41,6 @@ public class MemberReturnerDto {
         this.dob = details.getDob();
         this.occupation = details.getOccupation();
         this.place = details.getWorkPlace();
+        this.memo = details.getMemo();
     }
 }

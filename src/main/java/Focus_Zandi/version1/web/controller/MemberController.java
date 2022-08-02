@@ -33,6 +33,13 @@ public class MemberController {
         return details;
     }
 
+    @GetMapping("/members/{name}")
+    public MemberReturnerDto showMemberByName(@PathVariable String name) {
+        return memberService.findMemberByUserNameWithDetailsV2(name);
+    }
+
+
+
     // 유저 정보 수정 (최초생성시에는 null로 기입)
     @PostMapping("/editMember")
     public int getDetails(@RequestBody DetailsDto detailsDto, Authentication authentication, HttpServletRequest request, HttpServletResponse response) {
