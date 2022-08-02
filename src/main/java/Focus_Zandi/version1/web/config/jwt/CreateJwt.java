@@ -3,9 +3,6 @@ package Focus_Zandi.version1.web.config.jwt;
 import Focus_Zandi.version1.domain.Member;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 
 import java.security.Key;
 import java.util.Date;
