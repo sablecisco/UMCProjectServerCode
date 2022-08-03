@@ -37,18 +37,19 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
 
-//        String header = request.getHeader(JwtProperties.HEADER_STRING);
-//        System.out.println("header Authorization : " + header);
+        Enumeration<String> headerNames = request.getHeaderNames();
+        while (true) {
+            String name = headerNames.nextElement();
+            String header = request.getHeader(name);
+            System.out.println("name = " + name);
+            System.out.println("header = " + header);
+
+            if(!headerNames.hasMoreElements()) break;
+        }
 
         String access_token = request.getHeader("ACCESS_TOKEN");
         String refresh_token = request.getHeader("REFRESH_TOKEN");
 
-        log.info("req={}", request);
-
-        log.info("accessToken={}", access_token);
-        log.info("refreshToken={}", refresh_token);
-
-        System.out.println("request = " + request);
         System.out.println("access_token = " + access_token);
         System.out.println("refresh_token = " + refresh_token);
 
