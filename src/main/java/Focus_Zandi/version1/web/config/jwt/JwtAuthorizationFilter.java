@@ -2,6 +2,7 @@ package Focus_Zandi.version1.web.config.jwt;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.Enumeration;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -49,9 +50,11 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
         String access_token = request.getHeader("ACCESS_TOKEN");
         String refresh_token = request.getHeader("REFRESH_TOKEN");
+        String authorization = request.getHeader("Authorization");
 
         System.out.println("access_token = " + access_token);
         System.out.println("refresh_token = " + refresh_token);
+        System.out.println("authorization = " + authorization);
 
 //        //header에 있는 jwt bearer 토큰 검증
 //        if (header == null || !header.startsWith(JwtProperties.TOKEN_PREFIX)) {
@@ -68,7 +71,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         String username = null;
 
         try {
-            username = JWT.require(Algorithm.HMAC512(JwtProperties.SECRET)).build().verify(access_token)
+            username = JWT.require(Algorithm.HMAC512(JwtProperties.SECRET)).build().verify(authorization)
                     .getClaim("username").asString();
         } catch (TokenExpiredException e) {
             String restoreUsername = JWT.require(Algorithm.HMAC512(JwtProperties.SECRET)).build().verify(refresh_token)
