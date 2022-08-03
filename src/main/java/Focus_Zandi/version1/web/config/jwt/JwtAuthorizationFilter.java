@@ -13,6 +13,7 @@ import Focus_Zandi.version1.web.config.auth.PrincipalDetails;
 import Focus_Zandi.version1.web.repository.MemberRepository;
 import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -22,6 +23,7 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 
+@Slf4j
 public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
     private MemberRepository memberRepository;
@@ -38,11 +40,15 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 //        String header = request.getHeader(JwtProperties.HEADER_STRING);
 //        System.out.println("header Authorization : " + header);
 
-        System.out.println("JwtAuthorizationFilter.doFilterInternal");
-
         String access_token = request.getHeader("ACCESS_TOKEN");
         String refresh_token = request.getHeader("REFRESH_TOKEN");
 
+        log.info("req={}", request);
+
+        log.info("accessToken={}", access_token);
+        log.info("refreshToken={}", refresh_token);
+
+        System.out.println("request = " + request);
         System.out.println("access_token = " + access_token);
         System.out.println("refresh_token = " + refresh_token);
 
