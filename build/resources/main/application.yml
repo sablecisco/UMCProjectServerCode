@@ -14,23 +14,23 @@ spring:
     oauth2:
       client:
         registration:
-          google:
-            client-id: 795344605481-eh9clt5aracqv6avsfmr3ca611nemc7k.apps.googleusercontent.com
-            client-secret: 9LAFQ24GSN
-            scope:
-              - email
-              - profile
 #          google:
-#            client-id: 154711632031-e6a1lsonnrt68haimdnlou81n254rdug.apps.googleusercontent.com
-#            client-secret: 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
+#            client-id: 795344605481-eh9clt5aracqv6avsfmr3ca611nemc7k.apps.googleusercontent.com
+#            client-secret: 9LAFQ24GSN
 #            scope:
 #              - email
 #              - profile
+          google:
+            client-id: 154711632031-e6a1lsonnrt68haimdnlou81n254rdug.apps.googleusercontent.com
+            client-secret: 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
+            scope:
+              - email
+              - profile
 
 #server:
 #  servlet:
 #    session:
-#      timeout: 43200m      # 60m * 24h * 30d
+#      timeout: 43200m      # 60m * 24h * 30d5
 #      cookie:
 #        max-age: 43200m    # 60m * 24h * 30d
 #        name: SID

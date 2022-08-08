@@ -15,6 +15,10 @@ public class MemberDetails {
     @Column(name = "MEMBERDETAILS_ID")
     private long id;
 
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "MEMBER_ID")
+    private Member member;
+
     @Column(nullable = false)
     private String role = "ROLE_USER";
 
@@ -24,7 +28,8 @@ public class MemberDetails {
 
     private String occupation;
     private String workPlace;
-    private String memo;
+    private int numberOfFollowers = 0;
+    private String memo = "한줄 소개를 입력해주세요";
 
     public static int calcAge(String dob) {
         int year = LocalDate.now().getYear();
