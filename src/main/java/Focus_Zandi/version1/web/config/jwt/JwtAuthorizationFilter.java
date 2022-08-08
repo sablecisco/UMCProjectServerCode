@@ -38,9 +38,30 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
 
+<<<<<<< HEAD
+=======
+        Enumeration<String> headerNames = request.getHeaderNames();
+        while (true) {
+            String name = headerNames.nextElement();
+            String header = request.getHeader(name);
+            System.out.println("name = " + name);
+            System.out.println("header = " + header);
+
+            if(!headerNames.hasMoreElements()) break;
+        }
+
+>>>>>>> e1c7a6324cba5cafe5c9aca6c3a6a607574444fa
         String access_token = request.getHeader("ACCESS_TOKEN");
         String refresh_token = request.getHeader("REFRESH_TOKEN");
+        String authorization = request.getHeader("Authorization");
 
+<<<<<<< HEAD
+=======
+        System.out.println("access_token = " + access_token);
+        System.out.println("refresh_token = " + refresh_token);
+        System.out.println("authorization = " + authorization);
+
+>>>>>>> e1c7a6324cba5cafe5c9aca6c3a6a607574444fa
 //        //header에 있는 jwt bearer 토큰 검증
 //        if (header == null || !header.startsWith(JwtProperties.TOKEN_PREFIX)) {
 //            chain.doFilter(request, response);
@@ -56,7 +77,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         String username = null;
 
         try {
-            username = JWT.require(Algorithm.HMAC512(JwtProperties.SECRET)).build().verify(access_token)
+            username = JWT.require(Algorithm.HMAC512(JwtProperties.SECRET)).build().verify(authorization)
                     .getClaim("username").asString();
         } catch (TokenExpiredException e) {
             String restoreUsername = JWT.require(Algorithm.HMAC512(JwtProperties.SECRET)).build().verify(refresh_token)
