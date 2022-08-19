@@ -74,8 +74,7 @@ https://www.youtube.com/watch?v=EAQBYl3l6Tc&t=8s
 ---
 
 ### API Sheet
-![image](https://user-images.githubusercontent.com/55794835/185587044-f9f59f95-8923-489f-8dc3-5fb9aeef6de3.png)
-
+![image](https://user-images.githubusercontent.com/55794835/185589055-af864d2c-93b7-44bb-b519-c65c1478c87b.png)
 
 ---
 
