@@ -56,6 +56,8 @@ https://www.youtube.com/watch?v=EAQBYl3l6Tc&t=8s
 ### API Sheet
 ![image](https://user-images.githubusercontent.com/55794835/185589055-af864d2c-93b7-44bb-b519-c65c1478c87b.png)
 
+** 몇몇 기능은 추후 구현 예정 **
+
 ---
 
 ### Main Function 
