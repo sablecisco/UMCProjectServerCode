@@ -111,8 +111,12 @@ https://www.youtube.com/watch?v=EAQBYl3l6Tc&t=8s
 
 #### 컨틀롤러
     PathVariable, RequestParam
-        
     
+#### 서버 운영 
+    AWS : AWS EC2에 서버를 올려서 사용
+    Nginx : WAS 구성에서 WebServer를 담당하고 있다. 
+    CertBot : HTTPS Certification을 해주고 이를 관리해준다
+        
 ### 🧑‍💻 Ref. link
 
 - Idea Info. https://cake-tarn-9a3.notion.site/d053e9512d7c415898fd41261b315f8f
