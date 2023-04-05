@@ -68,7 +68,7 @@ https://www.youtube.com/watch?v=EAQBYl3l6Tc&t=8s
     
     2. 두번째로는 WEB기반 OAUTH2를 사용하려고 하였으나, IOS 환경에서는 WEB으로 로그인하는게 불가능했고 결국 ClientCredential 방식으로 변경하기로 하였다.
     
-    3. 최종적으로 프론트에서 OAuth2를 담당하고 백엔드는 JWT를 발급하고 이를 관리해주는 방식을 선택하였다. 
+    3. 최종적으로 프론트에서 OAuth2를 담당하고 백엔드는 JWT를 발급하고 이를 관리해주는 방식을 선택하였다.
     
 
 #### User Authentication 
@@ -121,3 +121,4 @@ https://www.youtube.com/watch?v=EAQBYl3l6Tc&t=8s
 
 - Idea Info. https://cake-tarn-9a3.notion.site/d053e9512d7c415898fd41261b315f8f
 - UMC https://makeus-challenge.notion.site/Univ-MakeUs-Challenge-2nd-Board-fba760aa7ed94edc93ebb42722307945
+- Server Developer Velog https://velog.io/@blacklandbird
